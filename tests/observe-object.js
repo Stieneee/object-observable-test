@@ -1,6 +1,6 @@
 const prettyBytes = require('pretty-bytes');
 
-const ObjectObservable = require('object-observable');
+const observeObject = require('observe-object');
 
 const data = require('../data/movies.json');
 const mutate = require('./mutate-data');
@@ -16,9 +16,7 @@ function checkMem() {
 
 const start = new Date();
 
-const watchedObject = ObjectObservable.create(data);
-
-ObjectObservable.observeInmediate(watchedObject, () => {
+const watchedObject = observeObject(data, () => {
   changeCount += 1;
   checkMem();
 });

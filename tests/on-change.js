@@ -10,13 +10,13 @@ let changeCount = 0;
 let maxMem = 0;
 
 function checkMem() {
-  let mem = process.memoryUsage();
+  const mem = process.memoryUsage();
   if (mem.rss > maxMem) maxMem = mem.rss;
 }
-  
+
 const start = new Date();
 
-const watchedObject = onChange(data, function () {
+const watchedObject = onChange(data, () => {
   changeCount += 1;
   checkMem();
 });
@@ -27,6 +27,6 @@ console.log({
   time: new Date() - start,
   maxMem: prettyBytes(maxMem),
   changeCount,
-})
+});
 
 setTimeout(() => process.exit(0), 100);
